@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Usuários - Lar dos Pets</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link href="../css/exibir.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div th:insert="~{layout/header}"></div>
+
+  <main>
+    <!-- mensagens -->
+    <div th:replace="layout/mensagens :: mensagens"></div>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2>Usuários</h2>
+    </div>
+
+    <!-- Campo de pesquisa -->
+    <div class="mb-4">
+      <input type="text" class="form-control" placeholder="Pesquisar por Nome..." id="searchInput" onkeyup="searchTable()"/>
+    </div>
+
+    <!-- Tabela dinâmica -->
+    <div th:unless="${#lists.isEmpty(usuarios)}">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover" id="usuariosTable">
+          <thead class="table-light">
+            <tr>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Aprovado</th>
+			  <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr th:each="u: ${usuarios}">
+              <td th:text="${u.nome}"></td>
+              <td th:text="${u.email}"></td>
+
+			  <td>
+			    <form th:action="@{/usuario/alterar-aprovacao/{id}(id=${u.idUser})}" method="post">
+			      <select name="aprovado" class="form-select form-select-sm">
+			        <option th:value="true" th:selected="${u.aprovado}">Sim</option>
+			        <option th:value="false" th:selected="${!u.aprovado}">Não</option>
+			      </select>
+			      <button type="submit" class="btn btn-primary btn-sm mt-1">Salvar</button>
+			    </form>
+			  </td>
+
+			
+			  <td>
+			    <form th:action="@{/usuario/alterar-role/{id}(id=${u.idUser})}" method="post">
+			      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			      <select name="roleId" class="form-select form-select-sm">
+			        <option th:each="r : ${roles}" 
+			                th:value="${r.idRole}" 
+			                th:text="${r.name}" 
+			                th:selected="${u.roles.contains(r)}">
+			        </option>
+			      </select>
+			      <button type="submit" class="btn btn-primary btn-sm mt-1">Salvar</button>
+			    </form>
+			  </td>
+			  
+              
+              <td >
+
+               
+				<a th:href="@{/usuario/excluir/{id}(id=${u.idUser})}" class="btn btn-danger btn-sm">Excluir</a>
+              
+              </td>
+			  
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <div th:insert="~{layout/footer}"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Script de busca -->
+  <script>
+    function searchTable() {
+      const input = document.getElementById("searchInput").value.toLowerCase().trim();
+      const rows = document.querySelectorAll("#usuariosTable tbody tr");
+
+      rows.forEach(row => {
+        const nome = row.cells[0].textContent.toLowerCase();
+        row.style.display = nome.includes(input) ? "" : "none";
+      });
+    }
+  </script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serviços - Lar dos Pets</title>
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+    <script src="https://kit.fontawesome.com/635a439e8c.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script th:src="@{/js/menu.js}" defer></script>
+    <script th:src="@{/js/index-animations.js}" defer></script>
+    <script th:src="@{/js/modal.js}" defer></script>
+
+    <style>
+        #nav_logo img {
+            height: 95px;
+            width: auto;
+        }
+
+        body {
+            background-color: var(--color-primary-1);
+            overflow-x: hidden;
+        }
+
+        /* --- LISTA DE INFORMAÇÕES --- */
+        .info-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 20px;
+        }
+
+        .info-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .info-list i {
+            color: #e9a209;
+            margin-right: 8px;
+            margin-top: 3px;
+        }
+
+        /* --- TITULOS SEM CENTRALIZAR --- */
+        .contact-details h2 {
+            text-align: left;
+            margin-top: 30px;
+            color: #222;
+        }
+
+        .note {
+            margin-top: 10px;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav id="navbar">
+            <h1 id="nav_logo">
+                <a th:href="@{/}">
+                    <img th:src="@{/img/NovaLogo3.png}" alt="Logotipo Lar dos Pets">
+                </a>
+            </h1>
+
+            <ul id="nav_list">
+                <li class="nav-item"><a th:href="@{/}">Início</a></li>
+                <li class="nav-item"><a th:href="@{/sobre-nos}">Sobre nós</a></li>
+                <li class="nav-item active"><a th:href="@{/servicos}">Serviços</a></li>
+                <li class="nav-item"><a th:href="@{/galeria}">Galeria</a></li>
+                <li class="nav-item"><a th:href="@{/planos}">Nossos preços</a></li>
+                <li class="nav-item"><a th:href="@{/contato}">Contato</a></li>
+            </ul>
+
+            <button id="btn_mobile">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </nav>
+
+        <div id="mobile_menu">
+            <ul id="mobile_nav_list">
+                <li class="nav-item"><a th:href="@{/}">Início</a></li>
+                <li class="nav-item"><a th:href="@{/sobre-nos}">Sobre nós</a></li>
+                <li class="nav-item active"><a th:href="@{/servicos}">Serviços</a></li>
+                <li class="nav-item"><a th:href="@{/galeria}">Galeria</a></li>
+                <li class="nav-item"><a th:href="@{/planos}">Nossos preços</a></li>
+                <li class="nav-item"><a th:href="@{/contato}">Contato</a></li>
+                <li class="nav-item">
+                    <a href="#" id="open-modal" class="btn-acesso-usuario">
+                        <i class="fa-solid fa-user"></i> Acesso
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <main id="content">
+        <section id="servicos" class="contact-section">
+            <span class="section-subtitle">Nossos Serviços</span>
+            <div class="contact-info-form">
+                <div class="contact-details">
+
+
+
+                    <!-- Creche -->
+                    <h2>Creche para Cães e Gatos</h2>
+                    <p>
+                        Opções de dia inteiro e meio período para seus companheiros caninos e felinos. Brincadeiras supervisionadas, áreas de descanso e bastante exercício, com grupos de brincadeiras supervisionadas, passeios ao ar livre e hora da soneca e relaxamento.
+                    </p>
+                    <p>
+                        Ambientes confortáveis e estimulantes para nossos hóspedes. Condomínios individuais com arranhadores e brinquedos, tempo de brincadeira diário e manutenção de caixas de areia.
+                    </p>
+                    <p class="note">
+                        <i class="fas fa-info-circle" style="color: #e9a209;"></i> Os preços podem variar dependendo do porte, tipo de pelo e comportamento do animal.
+                    </p>
+
+                    <!-- Banho e Tosa -->
+                    <h2>Banho e Tosa</h2>
+                    <p>
+                        Serviços básicos de banho e tosa, incluindo banhos, escovação e corte de unhas. Mantenha seu pet com a melhor aparência e sensação.
+                    </p>
+					
+					<!-- Requisitos -->
+					                   <h2>Regrinhas para Frequentar o Lar dos Pets</h2>
+					                   <ul class="info-list">
+					                       <li><i class="fas fa-info-circle"></i> Carteira de vacinação em dia (múltipla V8 ou V10, antirrábica, gripe).</li>
+					                       <li><i class="fas fa-info-circle"></i> Controle de pulgas e carrapatos em dia.</li>
+					                       <li><i class="fas fa-info-circle"></i> Vermifugação em dia (a cada 4 meses).</li>
+					                       <li><i class="fas fa-info-circle"></i> Filhotes são aceitos após todas as vacinas.</li>
+					                       <li><i class="fas fa-info-circle"></i> Alimentação deve ser trazida pelo tutor/responsável ou adquirida na cantina da creche.</li>
+					                       <li><i class="fas fa-info-circle"></i> Avaliação comportamental gratuita previamente agendada.</li>
+					                   </ul>
+					
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div id="footer_items">
+            <span id="copyright">
+                &copy; 2025 Lar dos Pets. Todos os direitos reservados.
+            </span>
+
+            <div class="social-media-buttons">
+                <a href="https://wa.me/21999999999"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/larpt_creche/"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.facebook.com/LarDosPetsCreche"><i class="fa-brands fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </footer>
+	
+	
+</body>
+
+</html>
+
+

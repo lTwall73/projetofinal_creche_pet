@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel Administrativo - Lar dos Pets</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/exibir.css" rel="stylesheet">
+
+ 
+</head>
+
+	<body>
+	  <div th:insert="~{layout/header}"></div>
+
+	  <main >
+		<div th:insert="~{layout/mensagens :: mensagens}"></div>
+		
+	    <div class="d-flex justify-content-between align-items-center mb-4">
+	      <h2>Funcionários</h2>
+	      <a th:href="@{/cadastrar_funcionario1}" class="btn btn-success">Novo Funcionário</a>
+	    </div>
+
+		<!-- Campo de pesquisa -->
+		<div class="mb-4">
+		  <input type="text" class="form-control" placeholder="Pesquisar por Matrícula do Funcionário..." id="searchInput" onkeyup="searchTable()" />
+		</div>
+
+	    <!-- Tabela dinâmica -->
+		<div th:unless="${#lists.isEmpty(funcionarios)}">
+	    <div class="table-responsive">
+	      <table class="table table-bordered table-hover" id="funcionariosTable">
+	        <thead class="table-light">
+	          <tr>
+	            <th>Matrícula</th>
+	            <th>Nome</th>
+	            <th>Sobrenome</th>
+	            <th>Ações</th>
+	          </tr>
+	        </thead>
+	        <tbody>         			
+
+	          <tr th:each="f: ${funcionarios}">
+	            <td th:text="${f.idFuncionario}"></td>
+	            <td th:text="${f.nome}"></td>
+	            <td th:text="${f.sobrenome}"></td>
+	            <td>
+					<button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" th:data-bs-target="'#funcionarioModal__' + ${f.idFuncionario}">Ver Detalhes</button>
+					</td>
+	            </td>
+	          </tr>
+	        </tbody>
+	      </table>
+		  </div>
+		  </div>
+	    
+	  </main>
+
+	  <!-- MODAL DINÂMICO -->
+	  <div th:each="f: ${funcionarios}">
+	    <div class="modal fade" th:id="'funcionarioModal__' + ${f.idFuncionario}" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+	      <div class="modal-dialog modal-lg">
+	        <div class="modal-content">
+	          <div class="modal-header bg-info text-white">
+	            <h5 class="modal-title" th:text="'Detalhes do Funcionário: ' + ${f.nome} + ' ' + ${f.sobrenome}"></h5>
+	            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+	          </div>
+
+	          <div class="modal-body">
+				
+				<h5>📋 Dados do Funcionário </h5>
+				          <p><strong>Matrícula:</strong> <span th:text="${f.idFuncionario}"></span></p>
+				          <p><strong>Nome:</strong> <span th:text="${f.nome}"></span></p>
+				          <p><strong>Sobrenome:</strong> <span th:text="${f.sobrenome}"></span></p>
+				          <p><strong>CPF:</strong> <span th:text="${f.cpf}"></span></p>
+				          <p><strong>RG:</strong> <span th:text="${f.rg}"></span></p>
+				          <p><strong>Telefone:</strong> <span th:text="${f.telefone}"></span></p>
+				          <p><strong>Email:</strong> <span th:text="${f.email}"></span></p>
+						  <p><strong>Data de Nascimento:</strong>
+							
+						  				    <span th:text="${#temporals.format(f.dataNascimento, 'dd/MM/yyyy')}">[Data]</span>
+						  				</p>
+
+						  				<p><strong>Data de Admissão:</strong>
+						  				    <span th:text="${#temporals.format(f.dataAdmissao, 'dd/MM/yyyy')}">[Data]</span>
+						  				</p>
+
+						  				<p><strong>Data de Demissão:</strong>
+						  				    <span th:text="${#temporals.format(f.dataDemissao, 'dd/MM/yyyy')}">[Data]</span>
+						  				</p>
+		          
+				       
+
+	            <hr>
+
+				<h5>💼 Cargo </h5>
+				          <p><strong>Função:</strong> <span th:text="${f.cargo.funcao}"></span></p>
+				          <p><strong>Salário:</strong> <span th:text="${#numbers.formatDecimal(f.cargo.salario, 1, 'POINT', 2, 'COMMA')}"></span></p>
+
+			    <hr>
+
+				<h5>🏠 Endereço </h5>
+				          <p><strong>CEP:</strong> <span th:text="${f.endereco.cep}"></span></p>
+				          <p><strong>Logradouro:</strong> <span th:text="${f.endereco.logradouro}"></span></p>
+				          <p><strong>Número:</strong> <span th:text="${f.endereco.numero}"></span></p>
+				          <p><strong>Bairro:</strong> <span th:text="${f.endereco.bairro}"></span></p>
+				          <p><strong>Cidade:</strong> <span th:text="${f.endereco.cidade}"></span></p>
+				          <p><strong>Estado:</strong> <span th:text="${f.endereco.estado}"></span></p>
+				          <p><strong>Complemento:</strong> <span th:text="${f.endereco.complemento}"></span></p>
+				          
+	          </div>
+
+	          <div class="modal-footer">
+	 
+			<a th:href="@{/funcionario/editar/{id}(id=${f.idFuncionario})}" class="btn btn-primary">Editar</a>
+		 <a th:href="@{/funcionario/excluir/{id}(id=${f.idFuncionario})}" class="btn btn-danger">Excluir</a>
+			
+			<!--<a href="@{/funcionario/excluir/{id}(id=${f.idFuncionario})}" class="btn btn-danger" th:onclick="'confirmarExclusao(\'/funcionario/excluir/' + ${f.idFuncionario} + '\')'"> Excluir</a>-->
+
+			
+			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+			
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+
+
+ 
+
+  <div th:insert="~{layout/footer}"></div>
+
+  <!-- Bootstrap e JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+
+
+  <script>
+    function searchTable() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const rows = document.querySelectorAll("#funcionariosTable tbody tr");
+
+      rows.forEach(row => {
+        const idFuncionario = row.cells[0].textContent.toLowerCase();
+        row.style.display = idFuncionario.includes(input) ? "" : "none";
+      });
+    }
+  </script>
+  
+  
+  <!--             
+  
+  <script>
+    function confirmarExclusao(url) {
+      if (confirm("Tem certeza que deseja excluir este funcionário? Esta ação não pode ser desfeita.")) {
+        window.location.href = url;
+      }
+    }
+  </script>
+  -->
+
+</body>
+</html>
+

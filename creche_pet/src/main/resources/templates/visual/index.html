@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br"  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lar dos Pets</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://kit.fontawesome.com/635a439e8c.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+	
+    <script src="../js/menu.js" defer></script>
+    <script src="../js/index-animations.js" defer></script>
+  <!-- <script src="../js/modal.js" defer></script>   -->  
+	
+	<style>
+			#nav_logo img {
+			    height:95px;
+			    width: auto;
+			}
+			
+			body {
+			    background-color: var(--color-primary-1);
+			    overflow-x: hidden;
+			}
+
+		</style>
+</head>
+<body>
+
+  <!-- Modal de Login --><!-- 
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 style="text-align: center;">Acesso Administrativo</h2>
+            
+            <form th:action="@{/login}" method="post">
+				<div class="mb-3">
+				   <label for="email" class="form-label">E-mail</label>
+				    <input type="email" id="email" th:field="*{email}" class="form-input" required placeholder="Digite seu e-mail">
+			   </div>
+                <div>
+                    <label for="senha" class="form-label">Senha</label>
+                    <input type="password" id="senha" name="senha" class="form-input" required>
+                </div>
+                <button type="submit" class="btn-login">Entrar</button>
+            </form>
+
+            <a th:href="@{/cadastro}" class="cadastro-link">Não tem uma conta? Cadastre-se</a>
+        </div>
+    </div>--> 
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="btn-acesso-container">
+            <a th:href="@{/login}" id="open-modal" class="btn-acesso-usuario">
+                <i class="fa-solid fa-user"></i>Acesso
+            </a>
+        </div>
+
+        <nav id="navbar">
+            <h1 id="nav_logo">
+                <a th:href="@{/}">
+                    <img th:src="@{/img/NovaLogo3.png}" alt="Logotipo Lar dos Pets">
+                </a>
+            </h1>
+
+            <ul id="nav_list">
+                <li class="nav-item active"><a th:href="@{/}">Início</a></li>
+                <li class="nav-item"><a th:href="@{/sobre-nos}">Sobre nós</a></li>
+                <li class="nav-item"><a th:href="@{/servicos}">Serviços</a></li>
+                <li class="nav-item"><a th:href="@{/galeria}">Galeria</a></li>
+                <li class="nav-item"><a th:href="@{/planos}">Nossos preços</a></li>
+                <li class="nav-item"><a th:href="@{/contato}">Contato</a></li>
+            </ul>
+
+            <button id="btn_mobile">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </nav>
+
+        <div id="mobile_menu">
+            <ul id="mobile_nav_list">
+                <li class="nav-item active"><a th:href="@{/}">Início</a></li>
+                <li class="nav-item"><a th:href="@{/sobre-nos}">Sobre nós</a></li>
+                <li class="nav-item"><a th:href="@{/servicos}">Serviços</a></li>
+                <li class="nav-item"><a th:href="@{/galeria}">Galeria</a></li>
+                <li class="nav-item"><a th:href="@{/planos}">Nossos preços</a></li>
+                <li class="nav-item"><a th:href="@{/contato}">Contato</a></li>
+                <li class="nav-item">
+                    <a href="#" id="open-modal" class="btn-acesso-usuario">
+                        <i class="fa-solid fa-user"></i> Acesso
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main id="content">
+        <section id="home">
+            <div id="cta">
+                <h1 class="title">Bem-vindo à nossa Creche</h1>
+                <p class="description">
+                    Onde o amor e a alegria encontram seu melhor amigo de quatro patas! <br><br>
+                    Aqui nós sabemos que seu pet é parte da sua família. É por isso que criamos um espaço seguro,
+                    divertido e cheio de carinho, projetado para oferecer a ele os melhores momentos longe de casa.
+                    <br><br>
+                    Seja para um dia de brincadeiras e socialização enquanto você trabalha, uma estadia confortável
+                    durante suas viagens, ou apenas para garantir que ele receba toda a atenção e exercícios que merece,
+                    somos o lar longe do lar que seu pet vai amar!
+                </p>
+                <div id="cta_buttons">
+                    <a th:href="@{https://wa.me/21999999999}" class="btn-default">Fale conosco</a>
+                </div>
+            </div>
+
+            <div id="banner">
+                <img th:src="@{/img/cao-gato102-removebg-preview.png}" alt="cao-gato102-removebg-preview">
+            </div>
+            <div class="shape"></div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <div id="footer_items">
+            <span id="copyright">
+                &copy; 2025 Lar dos Pets. Todos os direitos reservados.
+            </span>
+            <div class="social-media-buttons">
+                <a th:href="@{https://wa.me/21999999999}"><i class="fa-brands fa-whatsapp"></i></a>
+                <a th:href="@{https://www.instagram.com/larpt_creche/}"><i class="fa-brands fa-instagram"></i></a>
+                <a th:href="@{https://www.facebook.com/LarDosPetsCreche}"><i class="fa-brands fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </footer>
+
+</body>

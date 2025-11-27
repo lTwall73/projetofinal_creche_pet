@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Funcionário - Formulário 2</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/style.css" rel="stylesheet">
+	
+</head>
+
+<body>
+	
+	<div th:insert="~{layout/header}"></div>
+
+            <!-- Conteúdo principal -->
+            <main>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Cadastro do Funcionário</h2>
+					<a th:href="@{/exibir_funcionario}" class="btn btn-success">Exibir Funcionário</a>
+                </div>
+				
+				
+
+                <!--formulário -->
+				
+				<form th:action="@{/cadastrar_funcionario2}" th:object="${cargo}" method="post" id="cadastroForm" class="needs-validation" novalidate>
+
+			
+				
+				
+				  <div class="card border-secondary mb-4">
+				    <div class="card-header bg-secondary text-white fw-bold">Cargo do Funcionário</div>
+				    <div class="card-body row g-3">
+						
+		
+						    <div class="col-md-6">
+						      <label for="cargo" class="form-label">Cargo</label>
+							  <select id="cargo" class="form-select" th:field="*{idCargo}" onchange="atualizarSalario()" required>
+
+		
+						        <option value="">Selecione</option>
+						        <option th:each="cargo : ${cargos}"
+						                th:value="${cargo.idCargo}"
+						                th:text="${cargo.funcao}"
+									    th:attr="data-salario=${cargo.salario}">
+
+						        </option>
+						      </select>
+						      <div class="invalid-feedback">Selecione o cargo.</div>
+						    </div>
+
+						    <!-- Salário (aparece quando o cargo é selecionado) -->
+						    <div class="col-md-6">
+						      <label for="salario" class="form-label">Salário</label>
+						      <input type="text" id="salario" class="form-control" readonly>
+						    </div>
+							
+					
+				    </div>
+				  </div>
+
+				 
+				  <div class="d-flex justify-content-between">
+				    <a th:href="@{/cadastrar_funcionario1}" class="btn btn-secondary">Voltar</a> <!-- ou a rota anterior -->
+				    <button type="submit" class="btn btn-warning">Próxima Página</button>
+				  </div>
+				  
+				  <div class="text-center mt-4">
+				  	 <p class="fw-bold fim">2/3</p>
+			  	  </div>
+
+
+				</form>
+				
+				
+				
+				<!-- Fim Formulario-->
+				
+            </main>
+
+
+
+
+			<div th:insert="~{layout/footer}"></div>
+			
+			
+
+            <!-- Bootstrap e JavaScript -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+            <!-- Inputmask JavaScript puro -->
+            <script src="https://unpkg.com/inputmask@5.0.8/dist/inputmask.min.js"></script>
+			
+
+            <script>
+                // Aplicar máscaras com JavaScript puro
+                window.addEventListener('DOMContentLoaded', () => {
+                    Inputmask("999.999.999-99").mask(document.getElementById("cpf"));
+                    Inputmask("99.999.999-*").mask(document.getElementById("rg"));
+                    Inputmask("(99) 99999-9999").mask(document.getElementById("telefone"));
+                    Inputmask("99999-999").mask(document.getElementById("cep"));
+                    Inputmask("decimal", {
+                        radixPoint: ",",
+                        groupSeparator: ".",
+                        autoGroup: true,
+                        digits: 3,
+                        rightAlign: false
+                    }).mask(document.getElementById("peso"));
+                });
+            </script>
+
+            <script>
+                // Validação Bootstrap 5 ao submeter
+                (function () {
+                    const form = document.getElementById('cadastroForm');
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                })();
+            </script>
+
+            <script>
+                document.getElementById('cep').addEventListener('blur', function () {
+                    const cep = this.value.replace(/\D/g, '');
+
+                    if (cep.length !== 8) return;
+
+                    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.erro) {
+                                alert('CEP não encontrado.');
+                                return;
+                            }
+
+                            // Preencher os campos
+                            document.getElementById('logradouro').value = data.logradouro || '';
+                            document.getElementById('bairro').value = data.bairro || '';
+                            document.getElementById('cidade').value = data.localidade || '';
+                            document.getElementById('estado').value = data.uf || '';
+                        })
+                        .catch(() => {
+                            alert('Erro ao buscar o CEP. Tente novamente.');
+                        });
+                });
+            </script>
+
+			
+	
+			<script>
+				function atualizarSalario() {
+				    const selectCargo = document.getElementById("cargo");
+				    const selectedOption = selectCargo.options[selectCargo.selectedIndex];
+				    const salario = selectedOption.getAttribute("data-salario");
+				    
+				    if (!salario) {
+				        document.getElementById("salario").value = '';
+				        return;
+				    }
+
+				    const salarioFormatado = Number(salario).toLocaleString('pt-BR', {
+				        style: 'currency',
+				        currency: 'BRL'
+				    });
+
+				    document.getElementById("salario").value = salarioFormatado;
+				}
+
+			</script>	
+
+
+
+</body>
+
+</html>
+
+<style>
+   html,
+   body {
+     height: 100%;
+     margin: 0;
+     padding: 0;
+   }
+
+   body {
+     display: flex;
+     flex-direction: column;
+     padding-top: 140px;
+     padding-bottom: 70px;
+     background-color: #ffffff;
+   }
+
+   header {
+     z-index: 1000;
+   }
+
+   main {
+     flex: 1;
+     background-color: #f4f6f8;
+     padding: 2rem 1rem;
+     width: 100%;
+	 padding-bottom: 70px;
+   }
+
+   /* Centraliza o conteúdo do main */
+   main > * {
+     max-width: 960px;
+     margin-left: auto;
+     margin-right: auto;
+    
+   }
+
+
+   footer {
+
+     position: fixed;
+     bottom: 0;
+     left: 0;
+     right: 0;
+   }
+
+   /* Estilo de links do menu */
+   .nav-link {
+     transition: background-color 0.2s, color 0.2s;
+   }
+
+   .nav-link:hover {
+     background-color: #e0e0e0;
+ 
+     color: #000;
+     border-radius: 4px;
+   }
+ </style>

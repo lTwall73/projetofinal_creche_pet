@@ -1,0 +1,142 @@
+
+<header class="bg-warning fixed-top border-bottom shadow-sm">
+    <div class="container py-3">
+        <h1 class="text-center text-dark m-0">Setor Administrativo - Lar dos Pets</h1>
+
+        <!-- Menu -->
+        <nav class="mt-3" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+            <ul class="nav justify-content-center flex-wrap mt-3">
+
+              
+				<!-- Início para ADMIN -->
+				<li class="nav-item" sec:authorize="hasRole('ADMIN')">
+				    <a class="nav-link text-dark" href="/menuadm">Início</a>
+				</li>
+
+				<!-- Início para USER -->
+				<li class="nav-item" sec:authorize="hasRole('USER')">
+				    <a class="nav-link text-dark" href="/menuuser">Início</a>
+				</li>
+
+				
+				
+				
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/exibir_pet">Pet</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/exibir_matricula">Matrícula-Pet</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/exibir_turma">Turma</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/exibir_contato">Contato</a>
+                </li>
+
+                <!-- SOMENTE ADMIN -->
+                <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link text-dark" href="/exibir_funcionario">Funcionário</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link text-dark" href="/exibir_cargo">Cargo</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link text-dark" href="/exibir_servico">Serviço</a>
+                </li>
+				<li class="nav-item" sec:authorize="hasRole('ADMIN')">
+				     <a class="nav-link text-dark" href="/exibir_usuario">Usuários</a>
+				</li>
+
+                <!-- Logout -->
+                <li class="nav-item" >
+                    <form action="/logout" method="post" class="d-inline">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                        <button class="nav-link text-danger btn btn-link p-0 m-0 align-middle" type="submit">Sair
+                        </button>
+                    </form>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  <header class="bg-warning fixed-top border-bottom shadow-sm">
+    <div class="container py-3">
+      <h1 class="text-center text-dark m-0">Setor Administrativo - Lar dos Pets</h1>
+
+      
+	  <nav class="mt-3"
+	       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	  		
+	  	<ul class="nav justify-content-center flex-wrap mt-3">
+
+	  		
+	  		<li class="nav-item">
+	  			<a class="nav-link text-dark" href="/">Início</a>
+	  		</li>
+
+	  		<li class="nav-item">
+	  			<a class="nav-link text-dark" href="/exibir_pet">Pet</a>
+	  		</li>
+
+	  		<li class="nav-item">
+	  			<a class="nav-link text-dark" href="/exibir_matricula">Matrícula-Pet</a>
+	  		</li>
+
+	  		<li class="nav-item">
+	  			<a class="nav-link text-dark" href="/exibir_turma">Turma</a>
+	  		</li>
+
+	  	
+
+
+	  	
+	  		<li class="nav-item" sec:authorize="hasRole('ADMIN')">
+	  			<a class="nav-link text-dark" href="/exibir_funcionario">Funcionário</a>
+	  		</li>
+
+	  		<li class="nav-item" sec:authorize="hasRole('ADMIN')">
+	  			<a class="nav-link text-dark" href="/exibir_cargo">Cargo</a>
+	  		</li>
+
+	  		<li class="nav-item" sec:authorize="hasRole('ADMIN')">
+	  			<a class="nav-link text-dark" href="/exibir_servico">Serviço</a>
+	  		</li>
+			<li class="nav-item">
+			  			<a class="nav-link text-dark" href="/exibir_contato">Contato</a>
+			  		</li>
+		
+				 <form action="/logout" method="post" class="d-inline">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+			      <button class="nav-link text-danger btn btn-link p-0 m-0 align-middle" type="submit">Sair</button>
+			    </form>
+				
+
+	  	</ul>
+
+	  </nav>
+
+    </div>
+	
+	-->
+ 

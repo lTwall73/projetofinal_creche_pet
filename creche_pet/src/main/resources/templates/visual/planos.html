@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossos preços - Lar dos Pets</title>
+
+    <link rel="stylesheet" th:href="@{../css/styles.css}">
+    <script src="https://kit.fontawesome.com/635a439e8c.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+ 
+    	<script src="../js/menu.js" defer></script>
+	  <script src="../js/index-animations.js" defer></script>
+	  <script src="../js/modal.js" defer></script>
+
+	
+
+	<style>
+			#nav_logo img {
+			    height:95px;
+			    width: auto;
+			}
+			
+			body {
+			    background-color: var(--color-primary-1);
+			    overflow-x: hidden;
+			}
+
+		</style>
+	
+</head>
+
+<body>
+    <header>
+        <nav id="navbar">
+            <h1 id="nav_logo">
+                <a th:href="@{/}">
+                    <img th:src="@{/img/NovaLogo3.png}" alt="Logotipo Lar dos Pets">
+                </a>
+            </h1>
+
+            <ul id="nav_list">
+                <li class="nav-item"><a th:href="@{/}">Início</a></li>
+                <li class="nav-item"><a th:href="@{/sobre-nos}">Sobre nós</a></li>
+                <li class="nav-item"><a th:href="@{/servicos}">Serviços</a></li>
+                <li class="nav-item"><a th:href="@{/galeria}">Galeria</a></li>
+                <li class="nav-item active"><a th:href="@{/planos}">Nossos preços</a></li>
+                <li class="nav-item"><a th:href="@{/contato}">Contato</a></li>
+            </ul>
+
+            <button id="btn_mobile">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </nav>
+
+        <div id="mobile_menu">
+            <ul id="mobile_nav_list">
+                <li class="nav-item"><a th:href="@{/}">Início</a></li>
+                <li class="nav-item"><a th:href="@{/sobre-nos}">Sobre nós</a></li>
+                <li class="nav-item"><a th:href="@{/servicos}">Serviços</a></li>
+                <li class="nav-item"><a th:href="@{/galeria}">Galeria</a></li>
+                <li class="nav-item active"><a th:href="@{/planos}">Nossos preços</a></li>
+                <li class="nav-item"><a th:href="@{/contato}">Contato</a></li>
+                <li class="nav-item">
+                    <a href="#" id="open-modal" class="btn-acesso-usuario">
+                        <i class="fa-solid fa-user"></i> Acesso
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+
+	<main id="content">
+	        <section id="planos" class="contact-section">
+	            <span class="section-subtitle">Nossos Preços</span>
+	            <class="contact-info-form">
+	                <div class="contact-details">
+	                    <h2>CRECHE</h2>
+
+	                    <h3>Cães de Porte Micro e Pequeno</h3>
+	                    <class="pricing-table">
+	                        <div class="pricing-item">
+	                            <span class="service-name">5 dias no mês</span>
+	                            <span class="price-value">R$ 350,00</span>
+	                        </div>
+	                        <div class="pricing-item">
+	                            <span class="service-name">8 dias no mês</span>
+	                            <span class="price-value">R$ 520,00</span>
+	                        </div>
+	                        <div class="pricing-item">
+	                            <span class="service-name">12 dias no mês</span>
+	                            <span class="price-value">R$ 780,00</span>
+	                        </div>
+	                        <div class="pricing-item featured-package">
+	                            <span class="service-name">20 dias no mês</span>
+	                            <span class="price-value">R$ 1.200,00</span>
+	                        </div>
+	                        <br>
+	                        <h3 class="mt-20">Cães de Porte Médio e Grande</h3>
+	                        <class="pricing-table">
+	                            <div class="pricing-item">
+	                                <span class="service-name">5 dias no mês</span>
+	                                <span class="price-value">R$ 500,00</span>
+	                            </div>
+	                            <div class="pricing-item">
+	                                <span class="service-name">8 dias no mês</span>
+	                                <span class="price-value">R$ 760,00</span>
+	                            </div>
+	                            <div class="pricing-item">
+	                                <span class="service-name">12 dias no mês</span>
+	                                <span class="price-value">R$ 1.140,00</span>
+	                            </div>
+	                            <div class="pricing-item featured-package">
+	                                <span class="service-name">20 dias no mês</span>
+	                                <span class="price-value">R$ 1.800,00</span>
+	                            </div>
+	                            <br>
+	                            <h3 class="mt-20">Gatos de Porte Micro e Pequeno</h3>
+	                            <class="pricing-table">
+	                                <div class="pricing-item">
+	                                    <span class="service-name">5 dias no mês</span>
+	                                    <span class="price-value">R$ 250,00</span>
+	                                </div>
+	                                <div class="pricing-item">
+	                                    <span class="service-name">8 dias no mês</span>
+	                                    <span class="price-value">R$ 400,00</span>
+	                                </div>
+	                                <div class="pricing-item">
+	                                    <span class="service-name">12 dias no mês</span>
+	                                    <span class="price-value">R$ 600,00</span>
+	                                </div>
+	                                <div class="pricing-item featured-package">
+	                                    <span class="service-name">20 dias no mês</span>
+	                                    <span class="price-value">R$ 900,00</span>
+	                                </div>
+	                                <br>
+	                                <h3 class="mt-20">Gatos de Porte Médio e Grande</h3>
+	                                <class="pricing-table">
+	                                    <div class="pricing-item">
+	                                        <span class="service-name">5 dias no mês</span>
+	                                        <span class="price-value">R$ 400,00</span>
+	                                    </div>
+	                                    <div class="pricing-item">
+	                                        <span class="service-name">8 dias no mês</span>
+	                                        <span class="price-value">R$ 600,00</span>
+	                                    </div>
+	                                    <div class="pricing-item">
+	                                        <span class="service-name">12 dias no mês</span>
+	                                        <span class="price-value">R$ 840,00</span>
+	                                    </div>
+	                                    <div class="pricing-item featured-package">
+	                                        <span class="service-name">20 dias no mês</span>
+	                                        <span class="price-value">R$ 1.200,00</span>
+	                                    </div>
+	                </div>
+
+	                <div class="contact-form">
+	                    <br>
+	                    <h2>BANHO</h2>
+
+	                    <h3>Cães</h3>
+	                    <class="pricing-table">
+	                        <div class="pricing-item">
+	                            <span class="service-name">Porte Micro e Pequeno</span>
+	                            <span class="price-value">R$ 60,00</span>
+	                        </div>
+	                        <div class="pricing-item">
+	                            <span class="service-name">Porte Médio e Grande</span>
+	                            <span class="price-value">R$ 90,00</span>
+	                        </div>
+
+	                        <h3 class="mt-20">Gatos</h3>
+	                        <class="pricing-table">
+	                            <div class="pricing-item">
+	                                <span class="service-name">Porte Micro e Pequeno</span>
+	                                <span class="price-value">R$ 60,00</span>
+	                            </div>
+	                            <div class="pricing-item">
+	                                <span class="service-name">Porte Médio e Grande</span>
+	                                <span class="price-value">R$ 90,00</span>
+	                            </div>
+	                            <br>
+	                            <h2>TOSA</h2>
+
+	                            <h3>Cães</h3>
+	                            <class="pricing-table">
+	                                <div class="pricing-item">
+	                                    <span class="service-name">Pelo Curto</span>
+	                                    <span class="price-value">R$ 30,00</span>
+	                                </div>
+	                                <div class="pricing-item">
+	                                    <span class="service-name">Pelo Longo</span>
+	                                    <span class="price-value">R$ 50,00</span>
+	                                </div>
+
+	                                <h3 class="mt-20">Gatos</h3>
+	                                <class="pricing-table">
+	                                    <div class="pricing-item">
+	                                        <span class="service-name">Pelo Curto</span>
+	                                        <span class="price-value">R$ 30,00</span>
+	                                    </div>
+	                                    <div class="pricing-item">
+	                                        <span class="service-name">Pelo Longo</span>
+	                                        <span class="price-value">R$ 50,00</span>
+	                                    </div>
+	                </div>
+	        </section>
+	    </main>
+	
+	
+	
+	
+	
+	
+	    <footer>
+        <div id="footer_items">
+            <span id="copyright">
+                &copy; 2025 Lar dos Pets. Todos os direitos reservados.
+            </span>
+
+            <div class="social-media-buttons">
+                <a href="https://wa.me/21999999999"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/larpt_creche/"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.facebook.com/LarDosPetsCreche"><i class="fa-brands fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

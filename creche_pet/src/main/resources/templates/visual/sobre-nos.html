@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós - Lar dos Pets</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{../css/styles.css}">
+    
+    <!-- Ícones e Scripts -->
+    <script src="https://kit.fontawesome.com/635a439e8c.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+	<script src="../js/menu.js" defer></script>
+	<script src="../js/index-animations.js" defer></script>
+	<script src="../js/modal.js" defer></script>
+	
+	
+</head>
+
+<body>
+    <header>
+        <nav id="navbar">
+            <h1 id="nav_logo">
+                <a th:href="@{/}">
+                    <img th:src="@{/img/NovaLogo3.png}" alt="Logotipo Lar dos Pets">
+                </a>
+            </h1>
+
+            <ul id="nav_list">
+                <li class="nav-item">
+                    <a th:href="@{/}">Início</a>
+                </li>
+                <li class="nav-item active">
+                    <a th:href="@{/sobre-nos}">Sobre nós</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/servicos}">Serviços</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/galeria}">Galeria</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/planos}">Nossos preços</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/contato}">Contato</a>
+                </li>
+            </ul>
+
+            <button id="btn_mobile">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </nav>
+
+        <!-- Menu mobile -->
+        <div id="mobile_menu">
+            <ul id="mobile_nav_list">
+                <li class="nav-item">
+                    <a th:href="@{/}">Início</a>
+                </li>
+                <li class="nav-item active">
+                    <a th:href="@{/sobre-nos}">Sobre nós</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/servicos}">Serviços</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/galeria}">Galeria</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/planos}">Nossos preços</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/contato}">Contato</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" id="open-modal" class="btn-acesso-usuario">
+                        <i class="fa-solid fa-user"></i>Acesso
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+	<main id="content">
+	       <section id="sobre-nos" class="contact-section">
+	           <span class="section-subtitle">Sobre nós</span>
+	           <div class="contact-info-form">
+	               <class="contact-details">
+	                   <h2>Nossa Creche para Animais de Estimação</h2>
+	                   <br>
+	                   <p>Bem-vindo à Pet Creche, onde tratamos seus pets como família! Fundada em julho de 2025, nossa
+	                       missão é proporcionar um ambiente seguro, divertido e estimulante para cães e gatos enquanto
+	                       seus tutores estão ausentes.</p>
+	                   <br>
+	                   <p>Nossa dedicada equipe de amantes de animais está comprometida em garantir que cada pet receba
+	                       atenção personalizada, bastante exercício e um lugar confortável para relaxar.</p>
+	                   <br>
+	                   <p>Entendemos a importância da confiança quando se trata de seus amados companheiros, e nos
+	                       esforçamos para criar um lar longe de casa para eles.</p>
+	                   <br>
+	                   <p>Localizada no coração da cidade, nossa instalação possui espaçosas áreas de brincadeira internas,
+	                       áreas externas seguras e locais de descanso aconchegantes. Também oferecemos uma variedade de
+	                       serviços, desde creche até banho e tosa básicos.</p>
+	                   <class="contact-form">
+	                       <br>
+	                       <h2>Nossa Filosofia</h2>
+	                       <br>
+	                       <p>Acreditamos que os pets prosperam em um ambiente onde se sentem amados, seguros e engajados.
+	                           Nossa filosofia se baseia no reforço positivo, socialização e fornecimento de cuidados
+	                           individualizados adaptados às necessidades de cada pet.</p>
+
+	                       <class="contact-form">
+	                           <br>
+	                           <h2>As rotinas no Lar dos Pets</h2>
+	                           <br>
+	                           <p>A rotina no Lar dos Pets é essencial para o bem-estar dos pets, incluindo café da manhã,
+	                               enriquecimento ambiental, almoço, musicoterapia, aromaterapia, cromoterapia,
+	                               brincadeiras, sala de TV, treinos e jantar.</p>
+
+	                           <ul class="agenda-customizada">
+	                               <li>07 às 9:30 Entrada dos Pets e estabilização de energia / Café da manhã.
+	                               </li>
+	                               <li>9:30 às 11 Enriquecimento ambiental por grupos e atividades dirigidas para gasto de energia.</li>
+	                               <li>11 às 13 Almoço.</li>
+	                               <li>13 às 14 Sala de Cura (aromaterapia, cromoterapia, musicoterapia e sala de TV).</li>
+	                               <li>14 às 17 Brincadeiras livres, treinos individuais da tarde e Banho.</li>
+	                               <li>17 às 19 Saída dos Pets.</li>
+	                           </ul>
+	           </div>
+	           </div>
+	       </section>
+	   </main>
+
+    <footer>
+        <div id="footer_items">
+            <span id="copyright">
+                &copy; 2025 Lar dos Pets. Todos os direitos reservados.
+            </span>
+            <div class="social-media-buttons">
+                <a href="https://wa.me/21999999999">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <a href="https://www.instagram.com/larpt_creche/">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/LarDosPetsCreche">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
+<style>
+			#nav_logo img {
+			    height:95px;
+			    width: auto;
+			}
+			
+			body {
+			    background-color: var(--color-primary-1);
+			    overflow-x: hidden;
+			}
+
+			
+			/* O CSS para estilizar a lista */
+			      .agenda-customizada {
+			          /* 1. Remove o marcador padrão do <ul> */
+			          list-style-type: none;
+			          padding-left: 0;
+			          /* Remove o padding padrão da lista */
+			          margin: 20px;
+			          font-family: Arial, sans-serif;
+			      }
+
+			      .agenda-customizada li {
+			          /* 2. Configura cada item para que o emoji possa ser posicionado */
+			          padding-left: 2em;
+			          /* Cria espaço para o marcador à esquerda */
+			          position: relative;
+			          margin-bottom: 10px;
+			          /* Espaço entre os itens */
+			      }
+
+			      .agenda-customizada li::before {
+			          /* 3. Define o marcador personalizado (Emoji) */
+			          content: "🕒";
+			          /* Emoji de relógio */
+			          color: #ff9900;
+			          /* Cor para o emoji/ícone (opcional, dependendo do emoji) */
+			          font-size: 1.2em;
+
+			          /* Posicionamento do marcador */
+			          position: absolute;
+			          left: 0;
+			          top: 0;
+			          /* Alinha o marcador com o topo do texto */
+			      }
+		</style>

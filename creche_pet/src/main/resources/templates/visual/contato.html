@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Lar dos Pets</title>
+    <link rel="stylesheet" href="../css/styles.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	
+    <script src="https://kit.fontawesome.com/635a439e8c.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+	<script src="../js/menu.js" defer></script>
+	<script src="../js/index-animations.js" defer></script>
+	<script src="../js/modal.js" defer></script>
+	
+	<style>
+		#nav_logo img {
+		    height:95px;
+		    width: auto;
+		}
+		
+		body {
+		    background-color: var(--color-primary-1);
+		    overflow-x: hidden;
+		}
+
+	</style>
+</head>
+
+<body>
+    <header>
+        <nav id="navbar">
+			<h1 id="nav_logo">
+			    <a th:href="@{/}">
+			        <img src="img/NovaLogo3.png" alt="Logotipo Lar dos Pets">
+			    </a>
+			</h1>
+			
+			<ul id="nav_list">
+			          <li class="nav-item">
+			              <a th:href="@{/}">Início</a>
+			          </li>
+			          <li class="nav-item">
+			              <a th:href="@{/sobre-nos}">Sobre nós</a>
+			          </li>
+			          <li class="nav-item">
+			              <a th:href="@{/servicos}">Serviços</a>
+			          </li>
+			          <li class="nav-item">
+			              <a th:href="@{/galeria}">Galeria</a>
+			          </li>
+			          <li class="nav-item">
+			              <a th:href="@{/planos}">Nossos preços</a>
+			          </li>
+			          <li class="nav-item active">
+			              <a th:href="@{/contato}">Contato</a>
+			          </li>
+			      </ul>
+
+			      <button id="btn_mobile">
+			          <i class="fa-solid fa-bars"></i>
+			      </button>
+			  </nav>
+
+			  <div id="mobile_menu">
+			      <ul id="mobile_nav_list">
+			          <li class="nav-item">
+			              <a th:href="@{/}">Início</a>
+			          </li>
+			          <li class="nav-item">
+			              <a th:href="@{/sobre-nos}">Sobre nós</a>
+			          </li>
+			          <li class="nav-item">
+			              <a th:href="@{/servicos}">Serviços</a>
+			          </li>
+			          <li class="nav-item">
+			              <a th:href="@{/galeria}">Galeria</a>
+			          </li>
+			          <li class="nav-item">
+			              <a th:href="@{/planos}">Nossos preços</a>
+			          </li>
+			          <li class="nav-item active">
+			              <a th:href="@{/contato}">Contato</a>
+			          </li>
+			          <li class="nav-item">
+			              <a href="#" id="open-modal" class="btn-acesso-usuario">
+			                  <i class="fa-solid fa-user"></i> Acesso
+			              </a>
+			          </li>
+			      </ul>
+			  </div>
+			  
+			  
+			  
+    </header>
+    <main id="content">
+		<div th:replace="layout/mensagens :: mensagens"></div>
+		
+        <section id="contato" class="contact-section">
+            <span class="section-subtitle">Contato</span>
+            <class="contact-info-form">
+                <div class="contact-details">
+
+                    <p>Tem dúvidas ou quer reservar um lugar para seu pet? Fale conosco!</p>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>End.:</strong> Rua Jorn. Antônio de Freitas, 75 -
+                        Jd. América - RJ - Cep: 21240-535</p>
+                    <p><i class="fas fa-phone-alt"></i> <strong>Tel.:</strong> (21) 2333-8337</p>
+                    <p><i class="fas fa-envelope"></i> <strong>E-mail:</strong> lardospets@gmail.com</p>
+                    <p><i class="fas fa-clock"></i> <strong>Horário:</strong> Segunda - Sexta: 7:00 - 19:00 | Sábado:
+                        9:00 - 17:00 | Domingo: Fechado</p>
+                    <br>
+					<div class="contact-form">
+					                       <h2>Envie-nos uma Mensagem</h2>
+
+					                       <form th:action="@{/contato}" method="post" th:object="${contato}">
+											
+					                           <div class="form-group">
+					                               <label for="nome">Nome:</label>
+					                               <input type="text" id="nome" th:field="*{nome}" placeholder="Seu nome" required>
+					                           </div>
+
+					                           <div class="form-group">
+					                               <label for="email">E-mail:</label>
+					                               <input type="email" id="email" th:field="*{email}" placeholder="seuemail@exemplo.com" required>
+					                           </div>
+
+					                           <div class="form-group">
+					                               <label for="assunto">Assunto:</label>
+					                               <input type="text" id="assunto" th:field="*{assunto}" placeholder="Assunto da mensagem" required>
+					                           </div>
+
+					                           <div class="form-group">
+					                               <label for="mensagem">Mensagem:</label>
+					                               <textarea id="mensagem" th:field="*{mensagem}" placeholder="Sua mensagem" required></textarea>
+					                           </div>
+											   <input type="hidden" th:field="*{dataEnvio}">
+
+
+					                           <button type="submit" class="btn-submit">Enviar Mensagem</button>
+					                       </form>					
+					
+					
+                </div>
+                </div>
+        </section>
+    </main>
+    <footer>
+        <div id="footer_items">
+            <span id="copyright">
+                &copy; 2025 Lar dos Pets. Todos os direitos reservados.
+            </span>
+            <div class="social-media-buttons">
+                <a href="https://wa.me/21999999999">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <a href="https://www.instagram.com/larpt_creche/">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/Lar Dos Pets Creche">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
+

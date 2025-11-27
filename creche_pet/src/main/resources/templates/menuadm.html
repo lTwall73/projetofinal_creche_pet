@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br"  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Setor Administrativo - Lar dos Pets</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<!-- Cabeçalho -->
+	 <div th:insert="~{layout/header}"></div>
+
+    <!-- Menu horizontal 		<nav class="nav justify-content-center nav-menu"
+		>
+		
+	     <a class="nav-link text-dark" href="#">Início</a>
+	     <a class="nav-link text-dark" href="exibir_pet">Pet</a>
+	  <a class="nav-link text-dark" href="exibir_matricula">Matrícula-Pet</a>
+	     <a class="nav-link text-dark" href="exibir_funcionario">Funcionário</a>
+	     <a class="nav-link text-dark" href="exibir_cargo">Cargo</a>
+	     <a class="nav-link text-dark" href="exibir_servico">Serviço</a>
+	     <a class="nav-link text-dark" href="exibir_turma">Turma</a>
+	     <a class="nav-link text-dark" href="exibir_contato">Contato</a>
+	   <a class="nav-link text-danger" href="/logout">Sair</a> 
+	 <form action="/logout" method="post" style="display:inline;">
+	   <button class="nav-link text-danger btn btn-link p-0 m-0" type="submit">Sair</button>
+	 </form> -->    
+
+	
+  
+  
+  <main style="margin-top: 130px; margin-bottom: 80px;"> <!-- espaço para header e footer -->
+      <div class="container text-center">
+          <!-- Título -->
+          <h2 class="mb-4">
+              Bem-vindo, <span th:text="${#authentication.name}">(Admnistrador)</span>!
+          </h2>
+
+          <!-- Mensagem complementar -->
+          <p class="lead">
+              Você está logado no sistema Lar dos Pets. Use o menu acima para navegar pelas páginas disponíveis.
+          </p>
+      </div>
+  </main>
+
+
+  
+
+  <!-- Rodapé -->
+   <div th:insert="~{layout/footer}"></div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+<style>
+  html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      background-color: #ffffff;
+    
+    }
+
+    header {
+      background-color: #ffc107; /* bg-warning */
+      padding-top: 1rem;
+      padding-bottom: 10px;
+    }
+
+    main {
+      flex: 1;
+      background-color: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    footer {
+      background-color: #198754;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    /* Navegação horizontal */
+    .nav-link {
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .nav-link:hover {
+      background-color: #e0e0e0;
+      color: #000;
+      border-radius: 4px;
+    }
+
+    .nav-menu {
+     
+    
+      padding: 0.5rem 0;
+    }
+</style>
+

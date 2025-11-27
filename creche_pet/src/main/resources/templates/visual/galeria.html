@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria - Lar dos Pets</title>
+	
+    <link rel="stylesheet" th:href="@{../css/styles.css}">
+    <script src="https://kit.fontawesome.com/635a439e8c.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+	<script src="../js/menu.js" defer></script>
+	  <script src="../js/index-animations.js" defer></script>
+	  <script src="../js/modal.js" defer></script>
+
+	
+
+	<style>
+			#nav_logo img {
+			    height:95px;
+			    width: auto;
+			}
+			
+			body {
+			    background-color: var(--color-primary-1);
+			    overflow-x: hidden;
+			}
+
+		</style>
+	
+</head>
+
+<body>
+    <header>
+        <nav id="navbar">
+            <h1 id="nav_logo">
+                <a th:href="@{/}">
+                    <img th:src="@{/img/NovaLogo3.png}" alt="Logotipo Lar dos Pets">
+                </a>
+            </h1>
+
+            <ul id="nav_list">
+                <li class="nav-item">
+                    <a th:href="@{/}">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/sobre-nos}">Sobre nós</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/servicos}">Serviços</a>
+                </li>
+                <li class="nav-item active">
+                    <a th:href="@{/galeria}">Galeria</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/planos}">Nossos preços</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/contato}">Contato</a>
+                </li>
+            </ul>
+            <button id="btn_mobile">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </nav>
+        <div id="mobile_menu">
+            <ul id="mobile_nav_list">
+                <li class="nav-item">
+                    <a th:href="@{/}">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/sobre-nos}">Sobre nós</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/servicos}">Serviços</a>
+                </li>
+                <li class="nav-item active">
+                    <a th:href="@{/galeria}">Galeria</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/planos}">Nossos preços</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/contato}">Contato</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" id="open-modal" class="btn-acesso-usuario">
+                        <i class="fa-solid fa-user"></i>Acesso
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+	<main id="content"> 
+	    <section id="galeria" class="contact-section">
+	        <span class="section-subtitle">Galeria de Fotos</span>
+	        <h3 class="section-title">Nossos Clientes Felizes</h3>
+	        <div class="gallery-grid">
+	            <div class="gallery-item">
+	                <img th:src="@{/img/brincando de pegar.jpg}" alt="Cachorro brincando de pegar a bola">
+	                <p>Brincando de Pegar</p>
+	            </div>
+	            <div class="gallery-item">
+	                <img th:src="@{/img/hora da soneca.jpg}" alt="Cachorro e gato dormindo juntos">
+	                <p>Hora da soneca</p>
+	            </div>
+	            <div class="gallery-item">
+	                <img th:src="@{/img/novos amigos.jpg}" alt="Filhotes de cães fazendo amizade">
+	                <p>Novos amigos</p>
+	            </div>
+	            <div class="gallery-item">
+	                <img th:src="@{/img/Diversão ao ar livre.jpg}" alt="Cães correndo e brincando ao ar livre">
+	                <p>Diversão ao ar livre</p>
+	            </div>
+	            <div class="gallery-item">
+	                <img th:src="@{/img/Hora do petisco.jpg}" alt="Cachorro recebendo um petisco">
+	                <p>Hora do petisco</p>
+	            </div>
+	            <div class="gallery-item">
+	                <img th:src="@{/img/Descansando confortavelmente.jpg}" alt="Cachorro descansando em uma cama macia">
+	                <p>Descansando confortavelmente</p>
+	            </div>
+	        </div>
+	    </section>
+	</main>
+
+
+    <footer>
+        <div id="footer_items">
+            <span id="copyright">
+                &copy; 2025 Lar dos Pets. Todos os direitos reservados.
+            </span>
+            <div class="social-media-buttons">
+                <a th:href="@{https://wa.me/21999999999}">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <a th:href="@{https://www.instagram.com/larpt_creche/}">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a th:href="@{https://www.facebook.com/LarDosPetsCreche}">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
+
