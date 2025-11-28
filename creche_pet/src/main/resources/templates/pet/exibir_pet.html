@@ -103,7 +103,11 @@
 			--> 
 			 <a th:href="@{/editar/{id}(id=${pet.idPet})}" class="btn btn-primary">Editar</a>
 			<!--<a th:href="@{/excluir/{id}(id=${pet.idPet})}" class="btn btn-danger">Excluir</a>  -->
-			<a href="#"  class="btn btn-danger"  th:onclick="'confirmarExclusao(\'/excluir/' + ${pet.idPet} + '\')'"> Excluir</a>
+<button type="button" class="btn btn-danger" data-bs-toggle="modal"
+        data-bs-target="#confirmDeleteModal"
+        th:data-item-id="${pet.idPet}">
+  Excluir
+</button>
 			
 		
 
@@ -130,7 +134,7 @@
 	    </div>
 	  </div>
 
-
+<th:block th:replace="~{layout/confirm-delete-modal :: confirmDeleteModal(itemType='pet', deleteUrlPrefix='/excluir/')}"></th:block>
  
 
   <div th:insert="~{layout/footer}"></div>
