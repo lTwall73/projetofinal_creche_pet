@@ -25,129 +25,125 @@ import javax.sql.DataSource;
 @EnableMethodSecurity(securedEnabled = true, proxyTargetClass = true)
 public class WebSecurityConfig {
 
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
+  @Autowired
+  private CustomUserDetailsService customUserDetailsService;
 
-    @Autowired
-    private DataSource dataSource;
+  @Autowired
+  private DataSource dataSource;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(customUserDetailsService);
-        authProvider.setPasswordEncoder(passwordEncoder());
-        return authProvider;
-    }
+  @Bean
+  public DaoAuthenticationProvider authenticationProvider() {
+    DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+    authProvider.setUserDetailsService(customUserDetailsService);
+    authProvider.setPasswordEncoder(passwordEncoder());
+    return authProvider;
+  }
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
-    }
+  @Bean
+  public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+    return config.getAuthenticationManager();
+  }
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http
-            .authorizeHttpRequests(authz -> authz
+    http
+        .authorizeHttpRequests(authz -> authz
 
-                // ARQUIVOS ESTÁTICOS
-                .requestMatchers("/resources/**", "/webjars/**", "/assets/**",
-                                 "/css/**", "/js/**", "/img/**", "/images/**").permitAll()
+            // ARQUIVOS ESTÁTICOS
+            .requestMatchers("/resources/**", "/webjars/**", "/assets/**",
+                "/css/**", "/js/**", "/img/**", "/images/**")
+            .permitAll()
 
-                // PÚBLICO: Páginas dentro de /visual/
-                .requestMatchers("/contato","/galeria","/planos","/servicos","/sobre-nos","/cadastro").permitAll()
+            // PÚBLICO: Páginas dentro de /visual/
+            .requestMatchers("/contato", "/galeria", "/planos", "/servicos", "/sobre-nos", "/cadastro").permitAll()
 
-                // PÚBLICO: login, cadastro e reset
-                .requestMatchers("/", "/login", "/login/**",
-                                 "/cadastro/**", "/forgot-password", "/reset-password","/cadastro").permitAll()
+            // PÚBLICO: login, cadastro e reset
+            .requestMatchers("/", "/login", "/login/**",
+                "/cadastro/**", "/forgot-password", "/reset-password", "/cadastro")
+            .permitAll()
 
-                // ACESSO PARA USER e ADMIN
-                .requestMatchers(
-                        "/exibir_pet",
-                        "/exibir_matricula",
-                        "/exibir_turma",
-                        "/exibir_contato",
-                        "/exibir_servico",
-                        "/menuuser",
-                        "/menuuser/**"
-                ).hasAnyRole("USER", "ADMIN")
+            // ACESSO PARA USER e ADMIN
+            .requestMatchers(
+                "/exibir_pet",
+                "/exibir_matricula",
+                "/exibir_turma",
+                "/exibir_contato",
+                "/exibir_servico",
+                "/menuuser",
+                "/menuuser/**")
+            .hasAnyRole("USER", "ADMIN")
 
-                // ACESSO EXCLUSIVO DO ADMIN
-                .requestMatchers(
-                        "/exibir_funcionario",
-                        "/exibir_cargo",            
-                        "/exibir_usuario",
-                        "/menuadm",
-                        "/menuadm/**",
-                        "/admin/**"
-                ).hasRole("ADMIN")
+            // ACESSO EXCLUSIVO DO ADMIN
+            .requestMatchers(
+                "/exibir_funcionario",
+                "/exibir_cargo",
+                "/exibir_usuario",
+                "/menuadm",
+                "/menuadm/**",
+                "/admin/**",
+                "/usuario/**")
+            .hasRole("ADMIN")
 
-                // TODO O RESTO EXIGE AUTENTICAÇÃO
-                .anyRequest().authenticated()
-            )
+            // TODO O RESTO EXIGE AUTENTICAÇÃO
+            .anyRequest().authenticated())
 
-            .formLogin(form -> form
-            	    .loginPage("/login")
-            	    .usernameParameter("email")   // <--- campo do email
-            	    .passwordParameter("senha")   // <--- campo da senha
-            	 /*   .defaultSuccessUrl("/home", true)*/
-            	    .successHandler(customAuthenticationSuccessHandler()) // nosso handler            	    .failureUrl("/login?error=true")
-            	    .permitAll()
-            	)
+        .formLogin(form -> form
+            .loginPage("/login")
+            .usernameParameter("email") // <--- campo do email
+            .passwordParameter("senha") // <--- campo da senha
+            /* .defaultSuccessUrl("/home", true) */
+            .successHandler(customAuthenticationSuccessHandler()) // nosso handler .failureUrl("/login?error=true")
+            .permitAll())
 
+        .csrf(csrf -> csrf
+            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
 
-            .csrf(csrf -> csrf
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-            )
+        .logout(logout -> logout
+            .logoutUrl("/logout")
+            .logoutSuccessUrl("/login?logout")
+            .deleteCookies("my-remember-me-cookie")
+            .permitAll())
 
-            .logout(logout -> logout
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout")
-                .deleteCookies("my-remember-me-cookie")
-                .permitAll()
-            )
+        .rememberMe(remember -> remember
+            .userDetailsService(customUserDetailsService)
+            .key("my-secure-key")
+            .tokenRepository(persistentTokenRepository())
+            .tokenValiditySeconds(24 * 60 * 60));
 
-            .rememberMe(remember -> remember
-                .userDetailsService(customUserDetailsService)
-                .key("my-secure-key")
-                .tokenRepository(persistentTokenRepository())
-                .tokenValiditySeconds(24 * 60 * 60)
-            );
+    return http.build();
+  }
 
-        return http.build();
-    }
+  @Bean
+  public PersistentTokenRepository persistentTokenRepository() {
+    JdbcTokenRepositoryImpl tokenRepositoryImpl = new JdbcTokenRepositoryImpl();
+    tokenRepositoryImpl.setDataSource(dataSource);
+    return tokenRepositoryImpl;
+  }
 
-    @Bean
-    public PersistentTokenRepository persistentTokenRepository() {
-        JdbcTokenRepositoryImpl tokenRepositoryImpl = new JdbcTokenRepositoryImpl();
-        tokenRepositoryImpl.setDataSource(dataSource);
-        return tokenRepositoryImpl;
-    }
-    
-    @Bean
-    public AuthenticationSuccessHandler customAuthenticationSuccessHandler() {
-        return (request, response, authentication) -> {
+  @Bean
+  public AuthenticationSuccessHandler customAuthenticationSuccessHandler() {
+    return (request, response, authentication) -> {
 
-            boolean isAdmin = authentication.getAuthorities().stream()
-                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+      boolean isAdmin = authentication.getAuthorities().stream()
+          .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
 
-            boolean isUser = authentication.getAuthorities().stream()
-                    .anyMatch(a -> a.getAuthority().equals("ROLE_USER"));
+      boolean isUser = authentication.getAuthorities().stream()
+          .anyMatch(a -> a.getAuthority().equals("ROLE_USER"));
 
-            if (isAdmin) {
-                response.sendRedirect("/menuadm");
-            } else if (isUser) {
-                response.sendRedirect("/menuuser");
-            } else {
-                response.sendRedirect("/login?error=true");
-            }
-        };
-    }
-
+      if (isAdmin) {
+        response.sendRedirect("/menuadm");
+      } else if (isUser) {
+        response.sendRedirect("/menuuser");
+      } else {
+        response.sendRedirect("/login?error=true");
+      }
+    };
+  }
 
 }

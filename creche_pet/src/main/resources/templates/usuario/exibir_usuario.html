@@ -72,7 +72,15 @@
 			      <button type="submit" class="btn btn-primary btn-sm mt-1">Salvar</button>
 			    </form>
 			  </td>
-			  
+			  <td>
+    <a th:href="@{/usuario/gerar-link-redefinir-senha/{id}(id=${u.idUser})}" class="btn btn-info btn-sm">Gerar Link</a>
+    <form th:action="@{/usuario/redefinir-senha/{id}(id=${u.idUser})}" method="post" style="display:inline;">
+        <input type="password" name="novaSenha" placeholder="Nova senha" required>
+        <input type="password" name="confirmarSenha" placeholder="Confirmar senha" required>
+        <button type="submit" class="btn btn-warning btn-sm">Redefinir</button>
+    </form>
+    <a th:href="@{/usuario/excluir/{id}(id=${u.idUser})}" class="btn btn-danger btn-sm">Excluir</a>
+</td>
               
               <td >
 
