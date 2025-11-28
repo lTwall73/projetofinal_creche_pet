@@ -123,12 +123,13 @@ public class AuthController {
   public String forgotPassword(@RequestParam String email, Model model) {
 
     try {
-      passwordResetService.createPasswordResetToken(email);
-      model.addAttribute("message", "Um link foi enviado para seu email.");
+      String token = passwordResetService.createPasswordResetToken(email);
+      String link = "http://localhost:8080/reset-password?token=" + token;
+      model.addAttribute("link", link); // Adiciona o link no modelo
+      model.addAttribute("message", "O link de redefinição foi gerado com sucesso.");
     } catch (Exception e) {
       model.addAttribute("error", e.getMessage());
     }
-
     return "forgot-password";
   }
 
