@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="confirmDeleteModal(itemType, deleteUrlPrefix)">
+  <!-- Modal de Confirmação de Exclusão -->
+  <div class="modal fade" th:id="'confirmDeleteModal'" tabindex="-1"
+       aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Exclusão</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          Tem certeza de que deseja excluir este <span th:text="${itemType}">item</span>? Esta ação não pode ser desfeita.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <a id="confirmDeleteBtn" class="btn btn-danger">Excluir</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    document.addEventListener('DOMContentLoaded', function () {
+      const confirmDeleteModal = document.getElementById('confirmDeleteModal');
+      const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+
+      if (confirmDeleteModal && confirmDeleteBtn) {
+        // Captura o evento de quando o modal é aberto
+        confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
+          // Botão que acionou o modal
+          const button = event.relatedTarget;
+          // Obtém o ID do item a ser excluído (ex: data-pet-id, data-funcionario-id, etc.)
+          const itemId = button.getAttribute('data-item-id');
+          // Atualiza o href do botão "Excluir" dentro do modal
+          confirmDeleteBtn.href = /*[[${deleteUrlPrefix}]]*/ '/excluir/' + itemId;
+        });
+      }
+    });
+    /*]]>*/
+  </script>
+</th:block>
+</html>
